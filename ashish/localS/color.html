@@ -1,0 +1,76 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  
+    <title>Pie Chart Generator</title>
+</head>
+<body>
+    
+        <input type="text" id="category" placeholder="Category">
+        <input type="number" id="value" placeholder="Value">
+        <input type="color" id="color-picker">
+        <button onclick=" change()">Add Category</button>
+   
+    <div id="chart-container">
+        <canvas id="pie-chart" width="10px" hight="10px"></canvas>
+    </div>
+    <script>
+        // JavaScript code
+        const categories = [];
+
+        const categoryInput = document.getElementById('category');
+        const valueInput = document.getElementById('value');
+        const colorPicker = document.getElementById('color-picker');
+        const addCategoryButton = document.getElementById('add-category');
+        const pieChartCanvas = document.getElementById('pie-chart');
+
+        function change() {
+            const category = categoryInput.value;
+            const value = parseFloat(valueInput.value);
+            const color = colorPicker.value;
+
+            if (category && !isNaN(value) && value > 0) {
+                // Check if the category already exists in the array
+                const existingCategory = categories.find(item => item.category === category);
+
+                if (!existingCategory) {
+                    categories.push({ category, value, color });
+                    updatePieChart();
+                    clearInputs();
+                } else {
+                    alert('Category already exists. Please choose a different category.');
+                }
+            }
+        };
+
+        function clearInputs() {
+            categoryInput.value = '';
+            valueInput.value = '';
+        }
+
+        function updatePieChart() {
+            const data = categories.map(category => category.value);
+            const backgroundColors = categories.map(category => category.color);
+
+            const ctx = pieChartCanvas.getContext('2d');
+            // Destroy the previous chart to avoid duplicates
+            if (window.myPieChart) {
+                window.myPieChart.destroy();
+            }
+
+            window.myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: categories.map(category => category.category),
+                    datasets: [{
+                        data: data,
+                        backgroundColor: backgroundColors,
+                    }],
+                },
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

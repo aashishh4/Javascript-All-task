@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <script>
+
+        var userdata = JSON.parse(localStorage.getItem("item")) || [];
+
+        function change() {
+            var dataValue = document.getElementById("q1").value;
+
+            if (dataValue.trim() === "") {
+                alert("Data cannot be blank");
+                return;
+            }
+
+            var newId = 1;
+            if (userdata.length > 0) {
+                var maxid = userdata[0].id;
+                for (var i = 1; i < userdata.length; i++) {
+                    if (userdata[i].id > maxid) {
+                        maxid = userdata[i].id
+                    }
+                }
+                newId = maxid + 1;
+            }
+
+            
+            userdata.push({
+                "data": dataValue,
+                "id": newId
+            });
+
+            
+            localStorage.setItem("item", JSON.stringify(userdata));
+
+            
+            document.getElementById("q1").value = "";
+            displayData();
+        }
+
+        function displayData() {
+            var tableHTML = `<table border="1px"><tr><th>Data</th><th>Action</th>`;
+
+            userdata.forEach((element, i) => {
+                tableHTML += `
+                    <tr>
+                        <td>${element.data}</td>
+                        <td><button onclick="deleteData(${element.id})">Delete</button></td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `</table>`;
+            document.querySelector(".main").innerHTML = tableHTML;
+        }
+
+        function deleteData(dataId) {
+            var d1 = userdata.findIndex((element) => element.id === dataId);
+
+            if (d1 !== -1) {
+                
+                userdata.splice(d1, 1);
+
+                localStorage.setItem("item", JSON.stringify(userdata));
+
+                displayData();
+            }
+        }
+
+
+
+      function change2()
+      {
+        var selectvalue=document.getElementById("s1").value;
+        var b1=document.getElementById("q2").value;
+
+        if(selectvalue.trim()==="")
+        {
+            alert("select cannot be empty");
+            return;
+        }
+        if(b1.trim()==="")
+        {
+            alert("title cannot be empty")
+            return;
+        }    
+      }
+
+
+    </script>
+</head>
+
+<body>
+    <div>
+     <h2>add Data</h2>
+     Data: <input type="text" id="q1"><br><br>
+     <button onclick="change()">Add Data</button>
+     <div class="main"></div>
+   </div>
+   <div>
+      <h2>add subData</h2>
+      <select id="s1"></select><br>
+      title<input type="text" id="q2"><br><br>
+      <button onclick="change2()">add title</button>
+   </div>
+
+
+
+    
+</body>
+
+</html>

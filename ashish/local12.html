@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <script>
+            function change1() {
+            var selectedValue = document.getElementById("w4").value;
+            var rate = document.querySelector("input[type='number']").value;
+
+            
+            var subCategoryData = JSON.parse(localStorage.getItem("subcategory")) || [];
+            subCategoryData.push({
+                "subcategory": selectedValue,
+                "rate": rate
+            });
+
+            
+            localStorage.setItem("subcategory", JSON.stringify(subCategoryData));
+
+            
+            document.querySelector("input[type='number']").value = "";
+
+            
+            displaySubCategoryData();
+        }
+
+        function displaySubCategoryData() {
+            var subCategoryData = JSON.parse(localStorage.getItem("subcategory")) || [];
+            var subCategoryTable = '<table border="1px"><tr><th>Subcategory</th><th>Rate</th></tr>';
+
+            subCategoryData.forEach((element) => {
+                subCategoryTable += `
+                    <tr>
+                        <td>${element.subcategory}</td>
+                        <td>${element.rate}</td>
+                    </tr>
+                `;
+            });
+
+            subCategoryTable += '</table>';
+            document.querySelector(".subcategory").innerHTML = subCategoryTable;
+        }
+        </script>
+    </head>
+    <body>
+        <div>
+            <h1>Sub category</h1>
+            <select id="w4">
+                <option value="car">car</option>
+                <option value="bag">bag</option>
+                <option value="mob">mob</option>
+            </select>
+        </div>
+        Rate: <input type="number"><br>
+        <button onclick="change1()">OK</button>
+        <br><br>
+        <div class="subcategory"></div>
+    </body>
+</html>

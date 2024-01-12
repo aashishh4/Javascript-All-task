@@ -1,0 +1,88 @@
+ larning process
+<html>
+
+<head>
+    <script>
+        function onBody() {
+            const a10 = [
+                {
+                    question: "1. What is 2 + 2?",
+                    optionsA: '3',
+                    optionsB: '4',
+                    optionsC: '5',
+                    optionsD: '6',
+                    correctAnswer: "4"
+                },
+                {
+                    question: "2. Which programming language is used for web development?",
+                    optionsA: "Java",
+                    optionsB: "Javascript",
+                    optionsC: "PhP",
+                    optionsD: "C++",
+                    correctAnswer: "Javascript"
+                },
+                {
+                    question: "3. What does HTML stand for?",
+                    optionsA: "Hyper Text Markup Language",
+                    optionsB: "Hyper Transfer Markup Language",
+                    optionsC: "High Text Markup Language",
+                    optionsD: "Hyperlink and Text Markup Language",
+                    correctAnswer: "Hyper Text Markup Language"
+                }
+            ];
+
+            const text = a10.map((x, i) => `
+                <div>
+                    <span class="${x.key}">${x.question} ${i + 1}</span><br>
+                    <div>
+                        <input name="q${i}"  type="radio" value="${x.optionsA}">${x.optionsA}
+                        <input name="q${i}"  type="radio" value="${x.optionsB}">${x.optionsB}
+                        <input name="q${i}" type="radio" value="${x.optionsC}">${x.optionsC}
+                        <input name="q${i}" type="radio" value="${x.optionsD}">${x.optionsD}
+                    </div>
+                </div>
+            `).join("");
+
+            const element = document.querySelector('#log');
+            element.innerHTML = text;
+        }
+
+        function check() {
+            var score = 0;
+            const a10 = [
+                {
+                    question: "1. What is 2 + 2?",
+                    correctAnswer: "4"
+                },
+                {
+                    question: "2. Which programming language is used for web development?",
+                    correctAnswer: "Javascript"
+                },
+                {
+                    question: "3. What does HTML stand for?",
+                    correctAnswer: "Hyper Text Markup Language"
+                }
+            ];
+
+            for (let i = 0; i < a10.length; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selectedOption && selectedOption.value === a10[i].correctAnswer) {
+                    score++;
+                }
+            }
+
+            const p1 = document.getElementById("p1");
+            p1.textContent = `Score: ${score}`;
+        }
+    </script>
+</head>
+
+<body onload="onBody()">
+    <div id="log"></div>
+    <p id="p1"></p>
+    <button onclick="check()">Submit</button>
+</body>
+
+</html>
+
+

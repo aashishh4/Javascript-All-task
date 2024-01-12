@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function change() {
+            var a1 = document.getElementById("q1").value;
+            var a2 = document.getElementById("q2").value;
+
+            var userData = JSON.parse(localStorage.getItem("product")) || [];
+            userData.push({
+                "category": a1,
+                "Color": a2
+            });
+            localStorage.setItem("product", JSON.stringify(userData));
+
+            document.getElementById("q1").value = "";
+            document.getElementById("q2").value = "";
+            displayCategoryData();
+        }
+
+        function displayCategoryData() {
+            var userData = JSON.parse(localStorage.getItem("product")) || [];
+            var finalData = '<table border="1px"><tr><th>Category</th><th>Color</th></tr>';
+
+            userData.forEach((element, i) => {
+                finalData += `
+                    <tr>
+                        <td>${element.category}</td>
+                        <td>${element.Color}</td>
+                    </tr>
+                `;
+            });
+
+            finalData += '</table>';
+            document.querySelector(".main").innerHTML = finalData;
+        }
+
+        function deleteCategories() {
+            localStorage.removeItem("product");
+            document.querySelector(".main").innerHTML = ''; // Clear the displayed data
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h1>Add category</h1>
+        Category: <input type="text" id="q1"><br>
+        Color: <input type="text" id="q2"><br><br>
+        <button onclick="change()">Submit</button>
+        <button onclick="deleteCategories()">Delete Categories</button> <!-- New button -->
+    </div>
+    <br><br>
+    <div class="main"></div>
+
+    <a href="Subcategory.html">sub Category</a>
+</body>
+</html>

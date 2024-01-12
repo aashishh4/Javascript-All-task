@@ -1,0 +1,158 @@
+
+
+<html>
+    <head>
+        <script>
+            function submit()
+            {
+                var a1=document.querySelector('input[name="q1"]:checked')
+                var a2=document.querySelector('input[name="q2"]:checked')
+                var a3=document.querySelector('input[name="q3"]:checked')
+                var a4=document.querySelector('input[name="q4"]:checked')
+                var a5=document.querySelector('input[name="q5"]:checked')
+                var score=0;
+
+                if(a1 && a1.value==='b')
+                {
+                    score++;
+                }
+                if(a2 && a2.value==='d')
+                {
+                    score++;
+                }
+                if(a3 && a3.value==='c')
+                {
+                    score++;
+                }
+                if(a4 && a4.value==='a')
+                {
+                    score++;
+                }
+                if( a5 && a5.value==='d')
+                {
+                    score++;
+                }
+
+            // document.getElementById("result").innerHTML="your score:" + " " + score + "out of 5 qustion"
+            document.querySelector(".main").innerHTML="your score:" + " " + score + "out of 5 qustion";
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1>Q.1 what is value 3+3?</h1>
+        <input type="radio" name="q1" value="a">a.3
+        <input type="radio" name="q1" value="b">b.6
+        <input type="radio" name="q1" value="c">c.9
+        <input type="radio" name="q1" value="d">d.12
+
+        <h1>Q.2 what is value 3-2?</h1>
+        <input type="radio" name="q2" value="a">a.3
+        <input type="radio" name="q2" value="b">b.6
+        <input type="radio" name="q2" value="c">c.9
+        <input type="radio" name="q2" value="d">d.1
+
+        <h1>Q.3 what is value 3*3?</h1>
+        <input type="radio" name="q3" value="a">a.3
+        <input type="radio" name="q3" value="b">b.6
+        <input type="radio" name="q3" value="c">c.9
+        <input type="radio" name="q3" value="d">d.12
+
+        <h1>Q.4 what is value 9/3?</h1>
+        <input type="radio" name="q4" value="a">a.3
+        <input type="radio" name="q4" value="b">b.6
+        <input type="radio" name="q4" value="c">c.9
+        <input type="radio" name="q4" value="d">d.12
+
+        <h1>Q.5 what is value 30%3?</h1>
+        <input type="radio" name="q5" value="a">a.3
+        <input type="radio" name="q5" value="b">b.6
+        <input type="radio" name="q5" value="c">c.9
+        <input type="radio" name="q5" value="d">d.0
+        <br><br>
+        <button onclick="submit()">submit</button>
+       <!-- <p id="result"></p> -->
+       <div class="main"></div>
+    </body>
+</html>
+
+
+
+// second method
+
+<!-- <html>
+
+<head>
+    <script>
+        function change() {
+            var a1 = document.querySelector('input[name="r1"]:checked');
+            var a2 = document.querySelector('input[name="r2"]:checked');
+            var a3 = document.querySelector('input[name="r3"]:checked');
+            var a4 = document.querySelector('input[name="r4"]:checked');
+            var a5 = document.querySelector('input[name="r5"]:checked');
+            var score = 0;
+
+           // console.log(a1)
+
+            if (a1 && a1.value === "c") {
+                score++;
+            }
+            if (a2 && a2.value === "b") {
+                score++;
+            }
+            if(a3 && a3.value==="c")
+            {
+                score++;
+            }
+            if(a4 && a4.value==="a")
+            {
+                score++;
+            }
+            if(a5 && a5.value==="b")
+            {
+                score++;
+            }
+            
+            var res = document.getElementById("result");
+            res.innerHTML  = "your score:" + " " + score + "out of 5 qustion"
+        }
+
+    </script>
+</head>
+
+ <body>
+    <div id="quiz">
+        <p id="p">Q.1 add 1+2=? </p><br>
+        <input type="radio" name="r1" value="a">a.1<br>
+        <input type="radio" name="r1" value="b">b.2<br>
+        <input type="radio" name="r1" value="c">c.3<br>
+
+        <p id="p1">Q.2 multi 3*6</p><br>
+        <input type="radio" name="r2" value="a">a.12<br>
+        <input type="radio" name="r2" value="b">b.18<br>
+        <input type="radio" name="r2" value="c">c.10<br>
+
+        <p id="p1">Q.3 multi 3+6</p><br>
+        <input type="radio" name="r3" value="a">a.12<br>
+        <input type="radio" name="r3" value="b">b.18<br>
+        <input type="radio" name="r3" value="c">c.9<br>
+
+
+        <p id="p1">Q.4 multi 36-10</p><br>
+        <input type="radio" name="r4" value="a">a.26<br>
+        <input type="radio" name="r4" value="b">b.18<br>
+        <input type="radio" name="r4" value="c">c.10<br>
+
+        <p id="p1">Q.5 multi 30/5</p><br>
+        <input type="radio" name="r5" value="a">a.1<br>
+        <input type="radio" name="r5" value="b">b.6<br>
+        <input type="radio" name="r5" value="c">c.3<br>
+
+
+        <button onclick="change()">total</button>
+        <p id="result"></p> 
+
+     </div> */
+</body>
+
+</html> --> 

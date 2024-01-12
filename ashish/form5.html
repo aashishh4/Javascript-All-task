@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script>
+            var adde=[]
+            function clone()
+            {
+                var a1=document.getElementById("q1");
+                a2=a1.cloneNode(true)
+                document.body.appendChild(a2);
+                adde.push(a2);   
+                var a2 = a1.querySelectorAll('input[type="text"]');
+            for (var i = 0; i < a2.length; i++) {
+                a2[i].value = "";
+            }      
+            }
+            function back()
+            {
+                if(adde.length>0)
+                {
+                    var laste=adde.pop();
+                    laste.remove();
+                }
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="q1">
+            <input type="text" id="q2">  
+            <input type="text" id="q3">
+            <input type="text" id="q4">
+            <button onclick="clone()">clone</button> 
+        </div>
+       
+        
+       
+        <!-- <button onclick="back()">back</button> -->
+    </body>
+</html>

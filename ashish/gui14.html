@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <script>
+            var second=0;
+            var intervalid=0
+            function start()
+            {
+                intervalid=window.setInterval(msg,1000)
+            }
+            function msg()
+            {
+                if(second==11)
+                {
+                    window.clearInterval(intervalid)
+                }
+                else
+                {
+                second++;
+                document.getElementById("q1").innerHTML="second"+second;
+                }
+                
+            }
+            function stop()
+            {
+              
+                 intervalid=window.setInterval(ms,1000)
+            }
+             function ms()
+             {
+                 if(second<=0)
+                 {
+                    window.clearInterval(intervalid)                    
+                 }
+                 else
+                 {
+                    
+                    second--;
+                     document.getElementById("q1").innerHTML="second"+second
+
+                }
+             }
+
+        </script>
+        <body>
+            <label id="q1">second:</label><br>
+            <button onclick="start()">start</button>
+            <button onclick="stop()">stop</button>
+
+        </body>
+    </head>
+</html>

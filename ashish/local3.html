@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function change() {
+            var a1 = document.querySelector('input[name="q1"]');
+            var a2 = document.querySelector('input[name="q2"]');
+
+            var userData = JSON.parse(localStorage.getItem("value")) || [];
+            userData.push({
+                'product': a1.value,
+                'total': a2.value
+            });
+            localStorage.setItem("value", JSON.stringify(userData));
+
+            a1.value = "";
+            a2.value = "";
+            displayData();
+        }
+
+        function displayData() {
+            var userData = JSON.parse(localStorage.getItem("value")) || [];
+            var finalData = `<table border=1px><tr><th>product</th><th>total</th></tr>`;
+            userData.forEach((element, i) => {
+                finalData += `<tr>
+                    <td>${element.product}</td>
+                    <td>${element.total}</td>
+                    </tr>`;
+            });
+            finalData += `</table>`;
+            document.querySelector('.main').innerHTML = finalData; // Fix the selector here
+        }
+    </script>
+</head>
+<body>
+    <form>
+        product <input type="text" name="q1"><br>
+        total <input type="text" name="q2"><br>
+        <button type="button" onclick="change()">Add Data</button> <!-- Added type="button" to prevent form submission -->
+    </form>
+    <div class="main"></div>
+    <script>
+        displayData(); // Call the displayData function to show existing data on page load
+    </script>
+</body>
+</html>

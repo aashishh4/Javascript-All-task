@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function change() {
+            var a1 = document.getElementById("q1").value;
+            var a2 = document.getElementById("q2").value;
+
+            if (a1.trim() === "") {
+                alert("Name cannot be empty");
+                return; // Return early to prevent further execution
+            }
+            if (a2.trim() === "") {
+                alert("Age cannot be empty");
+                return; // Return early to prevent further execution
+            }
+
+            var userdata = JSON.parse(localStorage.getItem("item")) || []; // Initialize as an empty array if not found
+            var newid = 1;
+            
+            if (userdata.length > 0) {
+                var maxid = userdata[0].id;
+                for (var i = 1; i < userdata.length; i++) {
+                    if (userdata[i].id > maxid) {
+                        maxid = userdata[i].id;
+                    }
+                }
+                newid = maxid + 1;
+            }
+
+            userdata.push({
+                "name": a1,
+                "age": a2,
+                "id": newid
+            });
+
+            localStorage.setItem("item", JSON.stringify(userdata));
+
+            document.getElementById("q1").value="";
+            document.getElementById("q2").value="";
+        }
+    </script>
+</head>
+<body>
+    Name: <input type="text" id="q1"><br>
+    Age: <input type="text" id="q2"><br>
+    <br><br>
+    <button onclick="change()">Add Data</button>
+</body>
+</html>

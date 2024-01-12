@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script>
+            function add()
+            {
+                var a3=[]
+                for(var i=0;i<a1.length;i++)
+                {
+                    for(var j=0;j<a2.length;j++)
+                    {
+                        if(a1[i]==a2[j])
+                        {
+                            a3.push(a2[j])
+                        }
+                        
+                    }
+                }
+                //console.log(a3)
+                return a3;
+                
+            }
+
+
+            var a1=[1,7,3,4,];
+            var a2=[9,7,6,4,];
+            var add1=add(a1,a2)
+            console.log(add1)
+        </script>
+    </head>
+    <body>Find common elements in two sorted array</body>
+</html>

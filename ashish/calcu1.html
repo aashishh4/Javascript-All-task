@@ -1,0 +1,46 @@
+<html>
+    <head>
+      
+      <script>
+        function change()
+        {
+           var a1=document.getElementById("q1").value;
+           var a2=document.getElementById("q2").value;
+           var a3=document.getElementById("q4").value;
+           if(a3=='+')
+           {
+             var a=parseInt(a1)+parseInt(a2)
+           }
+           if(a3=='-')
+           {
+             var a=parseInt(a1)-parseInt(a2)
+           }
+           if(a3=='*')
+           {
+             var a=parseInt(a1)*parseInt(a2)
+           }
+         
+           if(a3=='/')
+           {
+             var a=parseInt(a1)/parseInt(a2)
+           }
+           document.getElementById("q3").value=a;
+         
+         
+        }
+     </script>
+    </head>
+    <body>
+        num1<input type="text" id="q1"><br>
+        num2<input type="text" id="q2"><br>
+        result<input type="text" id="q3"><br>
+        
+        <select onchange="change()" id="q4">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        </select><br>
+  
+    </body>
+</html>

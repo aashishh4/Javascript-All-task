@@ -1,0 +1,59 @@
+
+<html>
+<head>
+    <script>
+       function change()
+       {
+      
+            // Get the user's selected answers
+            var q1Answer = document.querySelector('input[name="q1"]:checked');
+            var q2Answer = document.querySelector('input[name="q2"]:checked');
+            var q3Answer = document.querySelector('input[name="q3"]:checked');
+            
+            // Initialize the score
+            var score = 0;
+            
+            // Check the answers
+            if (q1Answer && q1Answer.value === "a") {
+                score++;
+            }
+            if (q2Answer && q2Answer.value === "b") {
+                score++;
+            }
+            if (q3Answer && q3Answer.value === "c") {
+                score++;
+            }
+            
+            // Display the results
+            var results = document.getElementById("results");
+            results.innerHTML = "You scored " + score + " out of 3 questions correctly!";
+        }
+    </script>
+</head>
+<body>
+    <h1>JavaScript Quiz</h1>
+
+    <div id="quiz">
+        <p id="p">Question 1: What is the capital of France?</p>
+        <input type="radio" name="q1" value="a"> a) Paris<br>
+        <input type="radio" name="q1" value="b"> b) London<br>
+        <input type="radio" name="q1" value="c"> c) Berlin<br><br>
+
+        <p id="p1">Question 2: What is 2 + 2?</p>
+        <input type="radio" name="q2" value="a"> a) 3<br>
+        <input type="radio" name="q2" value="b"> b) 4<br>
+        <input type="radio" name="q2" value="c"> c) 5<br><br>
+
+        <p id="p2">Question 3: What is the largest planet in our solar system?</p>
+        <input type="radio" name="q3" value="a"> a) Earth<br>
+        <input type="radio" name="q3" value="b"> b) Mars<br>
+        <input type="radio" name="q3" value="c"> c) Jupiter<br><br>
+
+      <button onclick="change()">submit</button>
+    </div>
+
+    <div id="results"></div>
+
+   
+</body>
+</html>

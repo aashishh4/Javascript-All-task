@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function change() {
+            var a1 = document.querySelector('input[name="name1"]').value;
+            var a2 = document.querySelector('input[name="Age"]').value;
+            var a3 = document.querySelector('input[name="mob"]').value;
+            if(a1.trim()==="")
+            {
+                alert("name can not blank")
+                return;
+            }
+
+            var userData = JSON.parse(localStorage.getItem("value1")) || [];
+
+            userData.push({
+                "name": a1,
+                "Age": a2,
+                "mob": a3
+            });
+            
+            localStorage.setItem("value1", JSON.stringify(userData));
+
+            // Clear input fields
+            document.querySelector('input[name="name1"]').value = "";
+            document.querySelector('input[name="Age"]').value = "";
+            document.querySelector('input[name="mob"]').value = "";
+            displayChangedData();
+        }
+
+        function displayChangedData()
+        {
+            var userData = JSON.parse(localStorage.getItem("value1")) || [];
+            var finalData=`<table border=1px><tr><th>name</th><th>Age</th><th>mob</th></tr>`;
+                userData.forEach((element,i) => {
+                    finalData+=`<tr>
+                        <td>${element.name}</td>
+                        <td>${element.Age}</td>
+                        <td>${element.mob}</td>
+                        </tr>`;
+                    
+                });
+                document.querySelector(".c1").innerHTML=finalData;
+        }
+
+        // function displayChangedData() {
+        //     var userData = JSON.parse(localStorage.getItem("value1")) || [];
+        //     var finalData = "<table><tr><th>Name</th><th>Age</th><th>Mob</th></tr>";
+
+        //     userData.forEach((element, i) => {
+        //         finalData += "<tr>";
+        //         finalData += "<td>" + element.name + "</td>";
+        //         finalData += "<td>" + element.Age + "</td>";
+        //         finalData += "<td>" + element.mob + "</td>";
+        //         finalData += "</tr>";
+        //     });
+
+        //     finalData += "</table>";
+        //     document.querySelector('.c1').innerHTML = finalData;
+        // }
+    </script>
+</head>
+<body>
+    <div>
+        Name: <input type="text" name="name1"><br>
+        Age: <input type="text" name="Age"><br>
+        Mob: <input type="text" name="mob"><br><br>
+        <button onclick="change()">Add Data</button>
+        
+    </div>
+    <div class="main">
+        <div class="c1"></div>
+    </div>
+</body>
+</html>

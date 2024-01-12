@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script>
+           function change()
+           {
+            var t1=document.getElementById("q1").value;
+            var t2=document.getElementById("q2").value;
+            var d= new Date(t1)
+            d.setDate(d.getDate()+parseInt(t2));
+            document.getElementById("q3").innerHTML=d
+           }
+            
+        </script>
+    </head>
+    <body>
+        <input type="date" id="q1"><br>
+        <input type="text" id="q2"><br>
+      <p id="q3"></p>
+        <button onclick="change()">ok</button>
+
+    </body>
+</html>

@@ -1,0 +1,91 @@
+<html>
+<head>
+    <script>
+        var userData = JSON.parse(localStorage.getItem("product")) || [];
+
+        function change() {
+            var a1 = document.getElementById("q1").value;
+            var a2 = document.getElementById("q2").value;
+
+            // Validate the input fields
+            if (a1.trim() === "") {
+                alert("Category cannot be empty");
+                return;
+            }
+            if (a2.trim() === "") {
+                alert("Color cannot be empty");
+                return;
+            }
+            var newId = 1;
+            if (userData.length > 0) {
+                var maxid = userData[0].id;
+                for (var i = 1; i < userData.length; i++) {
+                    if (userData[i].id > maxid) {
+                        maxid = userData[i].id;
+                    }
+                }
+                newId = maxid + 1;
+            }
+
+            userData.push({
+                "category": a1,
+                "Color": a2,
+                "id": newId
+            });
+            localStorage.setItem("product", JSON.stringify(userData));
+
+            document.getElementById("q1").value = "";
+            document.getElementById("q2").value = "";
+
+            displayCategoryData();
+        }
+
+        function displayCategoryData() {
+            var userData = JSON.parse(localStorage.getItem("product")) || [];
+            var finalData = '<table border="1px"><tr><th>Category</th><th>Color</th><th>Action</th></tr>';
+
+            userData.forEach((element, i) => {
+                finalData += `
+                    <tr>
+                        <td>${element.category}</td>
+                        <td>${element.Color}</td>
+                        <td><button onclick="deleteCategoryById(${element.id})">Delete</button></td>
+                    </tr>
+                `;
+            });
+
+            finalData += '</table>';
+            document.querySelector(".main").innerHTML = finalData;
+        }
+
+        function deleteCategoryById(categoryId) {
+            var indexToDelete = userData.findIndex((element) => element.id === categoryId);
+
+            if (indexToDelete !== -1)
+             {
+                
+                userData.splice(indexToDelete, 1);
+                localStorage.setItem("product", JSON.stringify(userData));
+                displayCategoryData();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h1>Add category</h1>
+        Category: <input type="text" id="q1"><br>
+        &nbsp;&nbsp;Color: <input type="color" id="q2"><br><br>
+
+        <button onclick="change()">Add Category</button>
+    </div>
+
+    <br><br>
+    <div class="main"></div>
+
+    <a href="category1.html">Sub Category</a>
+    
+    
+    <script>displayCategoryData();</script>
+</body>
+</html>

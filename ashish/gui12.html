@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script>
+            var intervalid=0;
+            var second=0;
+            function start()
+            {
+                intervalid=window.setInterval(msg,1000)
+                function msg()
+                {
+                    second++;
+                    document.getElementById('q1').innerHTML="second"+second
+                }
+            }
+            function stop()
+            {
+               window.clearInterval(intervalid)
+            }
+            function reset()
+            {second=0;
+                window.setInterval(intervalid)
+                document.getElementById('q1').innerHTML="second"+second
+            }
+
+        </script>
+    </head>
+    <body>
+        <label id="q1">second:0</label><br>
+        <button onclick="start()">start</button>
+        <button onclick="stop()">stop</button>
+        <button onclick="reset()">reset</button>
+    </body>
+</html>

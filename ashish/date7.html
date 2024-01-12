@@ -1,0 +1,24 @@
+<html>
+
+   <head>
+         <script>
+         function getDate()
+         {
+            
+           var months=["january","fubruary","march","april","may","june","july","august","september","october","navember","december"];
+        
+           var days=["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+            var data=document.getElementById("q1").value;
+            var a=new Date(data)
+            var a1=months[a.getMonth()];
+            document.write(a1+"<br>")   
+            var d=days[a.getDay()]
+            document.write(d) 
+         }
+        </script>
+    </head>
+    <body>
+      <input type="date" id="q1"><br>
+      <button onclick="getDate()">ok</button>
+    </body>
+</html>

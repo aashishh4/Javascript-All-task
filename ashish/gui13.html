@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <script>
+            var intervalid=0;
+            var second=0;
+            function fun1()
+            {
+                intervalid=window.setInterval(msg,1000)
+            }
+            function msg()
+            {    second++;
+                document.getElementById("q1").innerHTML="second"+second;
+                document.getElementById("q1").style.color="green";
+            }
+            if(fun1()==10)
+            {
+            function fun2()
+            {
+                window.clearInterval(intervalid)
+                document.getElementById("q1").style.color="blue"
+            }
+        }
+           /* function fun3()
+            {
+                second=0;
+                window.setInterval(intervalid)
+                document.getElementById("q1").innerHTML="second"+second;
+                document.getElementById("q1").style.color="red"
+            }*/
+
+        </script>
+    </head>
+    <body>
+        <h1>
+        <label id="q1">second:0</label><br></h1>
+        <button onclick="fun1()">start</button>
+        <button onclick="fun2()">stop</button>
+        <button onclick="fun3()">reset</button>
+    </body>
+</html>

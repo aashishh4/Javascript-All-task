@@ -1,0 +1,82 @@
+<!-- larning process -->
+<html>
+
+<head>
+    <script>
+        const a10 = [
+            {
+                question: "1. What is 2 + 2?",
+                optionsA: '3',
+                optionsB: '4',
+                optionsC: '5',
+                optionsD: '6',
+                correctAnswer: "4"
+            },
+            {
+                question: "2. Which programming language is used for web development?",
+                optionsA: "Java",
+                optionsB: "JavaScript",
+                optionsC: "PHP",
+                optionsD: "C++",
+                correctAnswer: "JavaScript"
+            },
+            {
+                question: "3. What does HTML stand for?",
+                optionsA: "Hyper Text Markup Language",
+                optionsB: "Hyper Transfer Markup Language",
+                optionsC: "High Text Markup Language",
+                optionsD: "Hyperlink and Text Markup Language",
+                correctAnswer: "Hyper Text Markup Language"
+            }
+        ];
+
+        function onBody() {
+            const text = a10.map((x, i) => `
+            <div>
+                <span class="${x.key}">${x.question}</span><br>
+                
+                <div>
+                    <input name="${i}" id="${i}A" type="radio" value="${x.optionsA}">${x.optionsA}
+                    <input name="${i}" id="${i}B" type="radio" value="${x.optionsB}">${x.optionsB}
+                    <input name="${i}" id="${i}C" type="radio" value="${x.optionsC}">${x.optionsC}
+                    <input name="${i}" id="${i}D" type="radio" value="${x.optionsD}">${x.optionsD}
+                </div>
+            </div>
+           `).join("");
+
+            const element = document.querySelector('#log');
+            element.innerHTML = text;
+
+            // Update the total question count
+            const d = document.querySelector('#p2');
+            d.textContent = `Total Questions: ${a10.length}`;
+        }
+
+        function check() {
+            var score = 0;
+
+            for (let i = 0; i < a10.length; i++)
+            {
+                const q1 = document.querySelector(`input[name="${i}"]:checked`);
+                console.log(q1.value)
+                if (q1) {
+                    if (q1.value === a10[i].correctAnswer) {
+                        score++;
+                    }
+                }
+            }
+
+            const resultElement = document.querySelector('#p1');
+            resultElement.textContent = `Your score is ${score}/${a10.length}`;
+        }
+    </script>
+</head>
+
+<body onload="onBody()">
+    <div id="log"></div>
+    <p id="p1"></p>
+    <p id="p2">Total Questions: 0</p>
+    <button onclick="check()">Submit</button>
+</body>
+
+</html>

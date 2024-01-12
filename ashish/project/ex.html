@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Append Child Example</title>
+</head>
+<body>
+    <div class="main"></div>
+    <input type="text" id="q1"><br>
+    <button onclick="change()">Append Child</button>
+
+    <script>
+        function change() {
+            // Get the input value
+            var inputValue = document.getElementById('q1').value;
+
+            // Get the target element where you want to append the list items
+            var finalData = document.querySelector(".main");
+
+            // Create a new list item element
+            var listItem = document.createElement("li");
+            listItem.textContent = inputValue;
+
+            // Append the list item to the target element
+            finalData.appendChild(listItem);
+
+            // Clear the input field
+            document.getElementById('q1').value = ''; 
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JavaScript appendChild() alternative method</title>
+  </head>
+  <body>
+    <p>List of children</p>
+    <ul class="menu">
+      <li>Click on Append Child button to append child elements in the list</li>
+    </ul>
+    <button onClick="createMenuItems()">Append Child</button>
+    
+    <script>
+      function createMenuItems() {
+        const ulElement = document.querySelector(".menu");
+        let numbers = [1, 2, 3, 4, 5];
+        let liElements = numbers.map((number) => `<li>${number}</li>`);
+        ulElement.innerHTML += liElements.join('');
+      }
+    </script>
+  </body>
+</html> -->

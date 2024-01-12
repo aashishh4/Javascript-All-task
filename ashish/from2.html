@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function clone() {
+           
+            var p1 = document.getElementById('q1');
+            var p2 = document.getElementById('q2');
+            var p3 = document.getElementById('q3');
+          
+           
+            var a1 = p1.cloneNode(true);
+            var a2 = p2.cloneNode(true);
+            var a3 = p3.cloneNode(true);
+
+          
+            document.body.appendChild(a1);
+            document.body.appendChild(a2);
+            document.body.appendChild(a3);
+        }
+
+        function backclone() {
+          
+        alert("hye")
+           
+            var r1 = document.querySelectorAll('input[type="text"]: not(#q1):not(#q2):not(#q3)');
+
+           
+            r1.forEach(function(element) {
+                element.remove();
+            });
+            
+        }
+           
+
+
+        
+    </script>
+</head>
+<body>
+    <div id="q1">
+    <input type="text"><br>
+    <input type="text"><br>
+    <input type="text"><br>
+</div>
+    <button onclick="clone()">Clone</button>
+    <button onclick="backclone()">Back Clone</button>
+</body>
+</html>

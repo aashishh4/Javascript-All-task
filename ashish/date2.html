@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <script>
+            function change()
+            {
+                var data=document.getElementById("q1").value;
+                var days=["sunday","monday","tuesday","wednesday","thursday","friday","saturday"]
+                var day=new Date(data)
+                var a=days[day.getDay()]
+                document.getElementById("q2").value=a;
+            }
+        </script>
+    </head>
+    <bodt>
+        <input type="date" id="q1"><br>
+        <input type="text" id="q2"><br>
+        <button onclick="change()">ok</button>
+    </bodt>
+</html>

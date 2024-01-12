@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script>
+      function change()
+      {
+        var days=["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+        var data=document.getElementById("q1").value;
+        var a=new Date(data);
+        var a1=days[a.getDay()]
+        document.getElementById("q2").value= a1;
+      }
+
+    </script>
+    </head>
+    <body>
+      <input type="date" id="q1"><br>
+      <input type="text" id="q2"><br>
+      <button onclick="change()">ok</button>
+    </body>
+
+</html>

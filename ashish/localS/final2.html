@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category and Subcategory Management</title>
+    <script>
+        // Data structure to store categories and associated subcategories
+        var categoryData = JSON.parse(localStorage.getItem("product")) || [];
+        var subCategoryData = JSON.parse(localStorage.getItem("sub")) || [];
+       // Initialize nextSubcategoryId
+
+        function change() {
+            var a1 = document.getElementById("q1").value;
+            var a2 = document.getElementById("q2").value;
+
+            // Validate the input fields
+            if (a1.trim() === "") {
+                alert("Category cannot be empty");
+                return;
+            }
+            if (a2.trim() === "") {
+                alert("Color cannot be empty");
+                return;
+            }
+
+            // Calculate the next id
+            var nextId = 1;
+
+            if (categoryData.length > 0) {
+                var maxId = categoryData[0].id; // Initialize maxId with the first element's ID
+
+                for (var i = 1; i < categoryData.length; i++) {
+                    if (categoryData[i].id > maxId) {
+                        maxId = categoryData[i].id; // Update maxId if a larger ID is found
+                    }
+                }
+
+                nextId = maxId + 1; // Calculate the next ID
+            }
+            categoryData.push({
+                "category": a1,
+                "Color": a2,
+                "id": nextId,
+            });
+            localStorage.setItem("product", JSON.stringify(categoryData));
+
+            document.getElementById("q1").value = "";
+            document.getElementById("q2").value = "";
+
+            displayCategoryData();
+        }
+
+        function displayCategoryData() {
+            var finalData = '<table border="1px"><tr><th>Category</th><th>Color</th><th>Action</th></tr>';
+
+            categoryData.forEach((element, i) => {
+                finalData += `
+                    <tr>
+                        <td>${element.category}</td>
+                        <td>${element.Color}</td>
+                        <td><button onclick="deleteCategoryByIndex(${i})">Delete</button></td>
+                    </tr>
+                `;
+            });
+
+            finalData += '</table>';
+            document.querySelector(".main").innerHTML = finalData;
+            updateSubcategoryDropdown();
+        }
+
+        function deleteCategoryByIndex(indexToDelete) {
+            if (indexToDelete >= 0 && indexToDelete < categoryData.length) {
+                var categoryToDelete = categoryData[indexToDelete].category;
+
+                // Check if there are associated subcategories
+                if (!hasAssociatedSubcategories(categoryToDelete)) {
+                    categoryData.splice(indexToDelete, 1);
+                    localStorage.setItem("product", JSON.stringify(categoryData));
+                    displayCategoryData(); // Refresh the displayed data
+                } else {
+                    alert("Cannot delete category with associated subcategories");
+                }
+            } else {
+                alert("Invalid index to delete");
+            }
+        }
+
+        function updateSubcategoryDropdown() {
+            var subcategorySelect = document.getElementById("w4");
+            subcategorySelect.innerHTML = "";
+
+            categoryData.forEach((element) => {
+                var option = document.createElement("option");
+                option.value = element.category;
+                option.text = element.category;
+                subcategorySelect.appendChild(option);
+            });
+        }
+
+        function hasAssociatedSubcategories(categoryToDelete) {
+            // Check if there are associated subcategories for the given category
+            return subCategoryData.some((element) => element.subcategory === categoryToDelete);
+        }
+
+        function change1() {
+            var selectedValue = document.getElementById("w4").value;
+            var rate = document.querySelector("input[type='number']").value;
+            if (selectedValue.trim() === "") {
+                alert("Subcategory cannot be empty");
+                return;
+            }
+            if (rate.trim() === "") {
+                alert("Rate cannot be empty");
+                return;
+            }
+
+            // Calculate the next subcategory ID
+            var nextSubcategoryId = 1; 
+            if (subCategoryData.length > 0) {
+                for (var i = 0; i < subCategoryData.length; i++) {
+                    var subcategory = subCategoryData[i];
+                    if (subcategory.id >= nextSubcategoryId) {
+                        nextSubcategoryId = subcategory.id + 1;
+                    }
+                }
+            }
+
+            subCategoryData.push({
+                "id": nextSubcategoryId,
+                "subcategory": selectedValue,
+                "rate": rate
+            });
+
+            localStorage.setItem("sub", JSON.stringify(subCategoryData));
+
+            document.querySelector("input[type='number']").value = "";
+
+            displaySubCategoryData();
+        }
+
+        function displaySubCategoryData() {
+            var subCategoryTable = '<table border="1px"><tr><th>Subcategory</th><th>Rate</th><th>Action</th></tr>';
+
+            subCategoryData.forEach((element, i) => {
+                subCategoryTable += `
+                    <tr>
+                        <td>${element.subcategory}</td>
+                        <td>${element.rate}</td>
+                        <td><button onclick="deleteSubCategory(${i})">Delete</button></td>
+                    </tr>
+                `;
+            });
+
+            subCategoryTable += '</table>';
+            document.querySelector(".subcategory").innerHTML = subCategoryTable;
+        }
+
+        function deleteSubCategory(index) {
+            if (index >= 0 && index < subCategoryData.length) {
+                subCategoryData.splice(index, 1);
+                localStorage.setItem("sub", JSON.stringify(subCategoryData));
+                displaySubCategoryData(); // Refresh the subcategory table
+            } else {
+                alert("Invalid index to delete");
+            }
+        }
+
+        // Initialize data on page load
+        displayCategoryData();
+        displaySubCategoryData();
+    </script>
+</head>
+<body>
+    <div>
+        <h1>Add category</h1>
+        Category: <input type="text" id="q1"><br>
+        Color: <input type="text" id="q2"><br>
+        <button onclick="change()">Submit</button>
+    </div>
+
+    <br><br>
+    <div class="main"></div>
+
+    <div>
+        <h1>Add Subcategory</h1>
+        <select id="w4"></select><br>
+        Rate: <input type="number"><br>
+        <button onclick="change1()">OK</button>
+    </div>
+    <br><br>
+    <div class="subcategory"></div>
+    <script>
+        displayCategoryData();
+        displaySubCategoryData()
+    </script>
+</body>
+</html>

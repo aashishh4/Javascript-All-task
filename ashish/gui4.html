@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <script>
+      function change()
+      {
+        var t1=parseInt(document.getElementById("q1").value);
+        var t2=parseInt(document.getElementById("q2").value);
+         if(t1>t2)
+         {
+          document.getElementById("l1").innerHTML="num1 is greatest"
+          
+         }
+         else
+         {
+          document.getElementById("l1").innerHTML="num2 is greatest"
+         }
+      }
+
+    </script>
+  </head>
+  <body>
+    num1<input type="number" id="q1"><br>
+    num2<input type="number" id="q2"><br>
+    <button onclick="change()">ok</button><br>
+    <label id="l1"></label><br>
+
+  </body>
+</html>

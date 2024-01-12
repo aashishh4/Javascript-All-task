@@ -1,0 +1,69 @@
+<!-- <html>
+    <head>
+        <script>
+         function change(value)
+         {
+            document.getElementById("q1").value+=value;
+             
+         }
+         function clearResult()
+         {
+            document.getElementById("q1").value=""
+         }
+
+         function calculate()
+         {
+            var a=document.getElementById("q1").value;
+            try{
+                document.getElementById("q1").value=eval(a)
+            }
+            catch (err){
+                document.getElementById("q1").value=err;
+            }
+         }
+        </script>
+    </head>
+    <body>
+        <input type="text" id="q1" required><br>
+        <button onclick="change('1')">1</button>
+        <button onclick="change('2')">2</button>
+        <button onclick="change('3')">3</button>
+        <button onclick="change('+')">+</button>
+        <br>
+        <button onclick="change('4')">4</button>
+        <button onclick="change('5')">5</button>
+        <button onclick="change('6')">6</button>
+        <button onclick="change('-')">-</button>
+        <br>
+        <button onclick="change('7')">7</button>
+        <button onclick="change('8')">8</button>
+        <button onclick="change('9')">9</button>
+        <button onclick="change('*')">*</button>
+        <br>
+        <button onclick="change('0')">0</button>
+        <button onclick="change('/')">/</button>
+        <button onclick="clearResult()">C</button>
+        <button onclick="calculate('=')">=</button>
+
+    </body>
+</html> -->
+
+<html>
+<body>
+
+<h1>JavaScript Global Methods</h1>
+<h2>The eval() Method</h2>
+
+<p id="demo"></p>
+
+<script>
+let x = 10;
+let y = 20;
+let z = "x * y";
+//let result = eval(z);
+
+document.getElementById("demo").innerHTML = eval(z)
+</script>
+
+</body>
+</html>

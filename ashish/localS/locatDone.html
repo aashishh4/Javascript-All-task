@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Category and Subcategory Management</title>
+    <script>
+
+        var categoryData = JSON.parse(localStorage.getItem("product")) || [];
+        var subCategoryData = JSON.parse(localStorage.getItem("sub")) || [];
+
+        function change() {
+            var a1 = document.getElementById("q1").value;
+            var a2 = document.getElementById("q2").value;
+
+
+            if (a1.trim() === "") {
+                alert("Category cannot be empty");
+                return;
+            }
+            if (a2.trim() === "") {
+                alert("Color cannot be empty");
+                return;
+            }
+
+
+            var nextId = 1;
+
+            if (categoryData.length > 0) {
+                var maxId = categoryData[0].id;
+
+                for (var i = 1; i < categoryData.length; i++) {
+                    if (categoryData[i].id > maxId) {
+                        maxId = categoryData[i].id;
+                    }
+                }
+
+                nextId = maxId + 1;
+            }
+            categoryData.push({
+                "category": a1,
+                "color": a2,
+                "id": nextId,
+            });
+            localStorage.setItem("product", JSON.stringify(categoryData));
+
+            document.getElementById("q1").value = "";
+            document.getElementById("q2").value = "";
+
+            displayCategoryData();
+            chart();
+        }
+
+        function displayCategoryData() {
+            var finalData = '<table border="1px"><tr><th>Category</th><th>Color</th><th>Action</th></tr>';
+
+            categoryData.forEach((element, i) => {
+                finalData += `
+                    <tr>
+                        <td>${element.category}</td>
+                        <td>${element.color}</td>
+                        <td><button onclick="deleteCategoryById(${element.id})">Delete</button></td>
+                    </tr>
+                `;
+            });
+
+            finalData += '</table>';
+            document.querySelector(".main").innerHTML = finalData;
+            updateSubcategoryDropdown();
+            chart();
+        }
+
+        function deleteCategoryById(categoryId) {
+            var indexToDelete = categoryData.findIndex((element) => element.id === categoryId);
+
+            if (indexToDelete !== -1) {
+
+                var categoryToDelete = categoryData[indexToDelete].category;
+                if (hasAssociatedSubcategories(categoryToDelete)) {
+                    alert("Cannot delete category with associated subcategories. Delete subcategories first.");
+                    return;
+                }
+
+
+                categoryData.splice(indexToDelete, 1);
+
+                localStorage.setItem("product", JSON.stringify(categoryData));
+
+
+                displayCategoryData();
+                chart();
+            }
+        }
+
+        function updateSubcategoryDropdown() {
+            var subcategorySelect = document.getElementById("w4");
+            subcategorySelect.innerHTML = "";
+
+            categoryData.forEach((element) => {
+                var option = document.createElement("option");
+                option.value = element.category;
+                option.text = element.category;
+                subcategorySelect.appendChild(option);
+            });
+        }
+
+        function hasAssociatedSubcategories(categoryToDelete) {
+
+            return subCategoryData.some((element) => element.subcategory === categoryToDelete);
+        }
+
+        function change1() {
+            var selectedValue = document.getElementById("w4").value;
+            var rate = document.querySelector("input[type='number']").value;
+            var title = document.querySelector("input[type='number1']").value;
+            if (selectedValue.trim() === "") {
+                alert("Subcategory cannot be empty");
+                return;
+            }
+            if (rate.trim() === "") {
+                alert("Rate cannot be empty");
+                return;
+            }
+            if (title.trim() === "") {
+                alert("title cannot be empty");
+                return;
+            }
+
+
+            var nextSubcategoryId = 1;
+            if (subCategoryData.length > 0) {
+                for (var i = 0; i < subCategoryData.length; i++) {
+                    var subcategory = subCategoryData[i];
+                    if (subcategory.id >= nextSubcategoryId) {
+                        nextSubcategoryId = subcategory.id + 1;
+                    }
+                }
+            }
+
+            subCategoryData.push({
+                "id": nextSubcategoryId,
+                "subcategory": selectedValue,
+                "rate": rate,
+                "title": title
+            });
+
+            localStorage.setItem("sub", JSON.stringify(subCategoryData));
+
+            document.querySelector("input[type='number']").value = "";
+            document.querySelector("input[type='number1']").value = "";
+
+            displaySubCategoryData();
+        }
+
+        function displaySubCategoryData() {
+            var subCategoryTable = '<table border="1px"><tr><th>Subcategory</th><th>Rate</th><th>title</th><th>Action</th></tr>';
+
+            subCategoryData.forEach((element, i) => {
+                subCategoryTable += `
+                    <tr>
+                        <td>${element.subcategory}</td>
+                        <td>${element.rate}</td>
+                        <td>${element.title}</td>
+                        <td><button onclick="deleteSubCategorybyId(${element.id})">Delete</button></td>
+                    </tr>
+                `;
+            });
+
+            subCategoryTable += '</table>';
+            document.querySelector(".subcategory").innerHTML = subCategoryTable;
+        }
+
+        function deleteSubCategorybyId(subcategoryId) {
+            var indexToDelete = subCategoryData.findIndex((element) => element.id === subcategoryId);
+
+            if (indexToDelete !== -1) {
+
+                subCategoryData.splice(indexToDelete, 1);
+                localStorage.setItem("sub", JSON.stringify(subCategoryData));
+
+
+                displaySubCategoryData();
+            }
+        }
+
+
+        displayCategoryData();
+        displaySubCategoryData();
+        chart();
+
+
+
+
+
+        function chart() {
+            var categoryData = JSON.parse(localStorage.getItem("product")) || [];
+            var labels = categoryData.map((category) => category.category);
+            var data = categoryData.map((category) => category.id); // Change this to the appropriate data you want to display.
+
+            var backgroundColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#1e7145"
+            ];
+
+            new Chart("myChart", {
+                type: "pie",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        backgroundColor: backgroundColors,
+                        data: data
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Category Distribution"
+                    }
+                }
+            });
+        }
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1>Add category</h1>
+        Category: <input type="text" id="q1"><br>
+        Color: <input type="text" id="q2"><br>
+        <button onclick="change()">add category</button>
+    </div>
+
+    <br><br>
+    <div class="main"></div>
+
+    <div>
+        <h1>Add Subcategory</h1>
+        <select id="w4"></select><br>
+        Rate: <input type="number"><br>
+        title: <input type="number1"><br>
+        <button onclick="change1()">add subcategory</button>
+    </div>
+    <br><br>
+    <div class="subcategory"></div>
+    <div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+        <button onclick="chart()">showchart</button>
+    </div>
+</body>
+
+</html>

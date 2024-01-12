@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function change() {
+            var a1 = document.getElementById("q1").value;
+            var a2 = document.getElementById("q2").value;
+
+            var userData = JSON.parse(localStorage.getItem("product")) || [];
+            userData.push({
+                "category": a1,
+                "Color": a2
+            });
+            localStorage.setItem("product", JSON.stringify(userData));
+
+            document.getElementById("q1").value = "";
+            document.getElementById("q2").value = "";
+            displayCategoryData();
+        }
+
+        function displayCategoryData() {
+            var userData = JSON.parse(localStorage.getItem("product")) || [];
+            var finalData = '<table border="1px"><tr><th>Category</th><th>Color</th><th>Action</th></tr>';
+
+            // Populate the dropdown list
+            var subcategorySelect = document.getElementById("w4");
+            subcategorySelect.innerHTML = ""; // Clear existing options
+
+            userData.forEach((element, i) => {
+
+                finalData += `
+    <tr>
+        <td>${element.category}</td>
+        <td>${element.Color}</td>
+        <td><button onclick="deleteCategory(${i})">Delete</button></td>
+    </tr>
+`;
+
+                // Add a new option to the dropdown for each category
+                var option = document.createElement("option");
+                option.value = element.category;
+                option.text = element.category;
+                subcategorySelect.appendChild(option);
+            });
+
+            finalData += '</table>';
+            document.querySelector(".main").innerHTML = finalData;
+        }
+
+        function change1() {
+            var selectedValue = document.getElementById("w4").value;
+            var rate = document.querySelector("input[type='number']").value;
+            var title = document.querySelector("input[name='title']").value;
+
+            var subCategoryData = JSON.parse(localStorage.getItem("subcategory")) || [];
+            subCategoryData.push({
+                "subcategory": selectedValue,
+                "rate": rate,
+                "title": title
+            });
+
+            localStorage.setItem("subcategory", JSON.stringify(subCategoryData));
+
+            document.querySelector("input[type='number']").value = "";
+            document.querySelector("input[name='title']").value = "";
+
+            displaySubCategoryData();
+        }
+
+        function displaySubCategoryData() {
+            var subCategoryData = JSON.parse(localStorage.getItem("subcategory")) || [];
+            var subCategoryTable = '<table border="1px"><tr><th>Subcategory</th><th>Rate</th><th>title</th></tr>';
+
+            subCategoryData.forEach((element, i) => {
+                subCategoryTable += `
+    <tr>
+        <td>${element.subcategory}</td>
+        <td>${element.rate}</td>
+        <td>${element.title}</td>
+        <td><button onclick="deleteSubCategory(${i})">Delete</button></td>
+    </tr>
+`;
+            })
+
+            subCategoryTable += '</table>';
+            document.querySelector(".subcategory").innerHTML = subCategoryTable;
+        }
+
+        function deleteCategory(index) {
+            var userData = JSON.parse(localStorage.getItem("product")) || [];
+            userData.splice(index, 1); // Remove the category at the specified index
+            localStorage.setItem("product", JSON.stringify(userData));
+            displayCategoryData(); // Refresh the category list
+        }
+
+        function deleteSubCategory(index) {
+            var subCategoryData = JSON.parse(localStorage.getItem("subcategory")) || [];
+            var selectedValue = document.getElementById("w4").value;
+
+            // Find the index of the subcategory to delete
+            subCategoryData.forEach((element, i) => {
+                if (element.subcategory === selectedValue && i === index) {
+                    subCategoryData.splice(i, 1); // Remove the subcategory at the found index
+                }
+            });
+
+            localStorage.setItem("subcategory", JSON.stringify(subCategoryData));
+            displaySubCategoryData(); // Refresh the subcategory list
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1>Add category</h1>
+        Category: <input type="text" id="q1"><br>
+        Color: <input type="text" id="q2"><br><br>
+        <button onclick="change()">Submit</button>
+    </div>
+    <br><br>
+    <div class="main"></div>
+    <div>
+        <h1>Sub category</h1>
+        <select id="w4"></select>
+    </div>
+    Rate:<input type="number"><br>
+    title:<input type="text" name="title"><br><br>
+    <button onclick="change1()">add Subcategory</button>
+    <br><br>
+    <div class="subcategory"></div>
+</body>
+
+</html>

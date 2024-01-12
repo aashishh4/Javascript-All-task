@@ -1,0 +1,60 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap');
+
+.a1{
+    width: 100%;
+    height: 100vb;
+    background-image: url("p1.jpg");
+    background-size: cover;
+    position: relative;
+
+}
+.a2{
+    width: 100%;
+    height: 100%;
+    
+    justify-content: center;
+    
+    color: wheat;
+    background-color: rgba(0,0,0,0.7);
+}
+.a3{
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+    padding:20px;
+    align-items: center;
+    flex-direction: column;
+}
+.a4{
+    
+    width: auto;
+    height: 80%;
+    margin: auto;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.a5{
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 750px;
+    height: 70px;
+    border: 1px red solid;
+    display: flex;
+    justify-content: center;
+}
+.a5 div{
+    width: 250px;
+    text-align: center;
+}
+input{
+    height: 50px ;
+    width: 70%;
+    border-radius: 5px;
+    border-color: transparent;
+    
+}

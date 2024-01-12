@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <script>
+            function change()
+            {
+                var a1=document.querySelector('input[name="r1"]:checked');
+                if (!a1) 
+            {
+                document.getElementById("result").innerHTML = "Please select an answer.";
+            } 
+            else 
+            {
+               
+                if (a1.value === "2") {
+                    document.getElementById("result").innerHTML = "true";
+                } else {
+                    document.getElementById("result").innerHTML = "Incorrect. The correct answer is 2.";
+                }
+            }
+        }
+
+
+function change1()
+{
+    var a2=document.querySelector('input[name="r2"]:checked');
+                if (!a2) 
+            {
+                document.getElementById("result1").innerHTML = "Please select an answer.";
+            } 
+            else 
+            {
+               
+                if (a2.value === "8") {
+                    document.getElementById("result1").innerHTML = "true";
+                } else {
+                    document.getElementById("result1").innerHTML = "Incorrect. The correct answer is 8.";
+                }
+            }
+
+
+}
+function change2()
+{
+    var a3=document.querySelector('input[name="r3"]:checked');
+                if (!a3) 
+            {
+                document.getElementById("result2").innerHTML = "Please select an answer.";
+            } 
+            else 
+            {
+               
+                if (a3.value === "6") {
+                    document.getElementById("result2").innerHTML = "true";
+                } else {
+                    document.getElementById("result2").innerHTML = "Incorrect. The correct answer is 6.";
+                }
+            }
+}
+        
+
+        </script>
+    </head>
+    <body>
+        
+        <h2>Q.1 what is a value 4/2</h2><br>
+        <input type="radio" id="q1" name="r1" value="3">a)3
+        <input type="radio" id="q1" name="r1" value="2">b)2
+        <input type="radio" id="q1" name="r1" value="4">c)4
+        <input type="radio" id="q1" name="r1" value="0">d)0<br>
+        <p id="result"></p><br>
+        <button onclick="change()">submit</button>
+        
+        <h2> Q.2 what is a value 4*2</h2><br>
+        <input type="radio" id="q2" name="r2" value="3">a)3
+        <input type="radio" id="q2" name="r2" value="2">b)2
+        <input type="radio" id="q2" name="r2" value="4">c)4
+        <input type="radio" id="q2" name="r2" value="8">d)8<br>
+        <p id="result1"></p>
+        <button onclick="change1()">submit</button>
+        
+        <h2>Q.3 what is a value 4+2</h2><br>
+        <input type="radio" id="q3" name="r3" value="6">a)6 
+        <input type="radio" id="q3" name="r3" value="2">b)2
+        <input type="radio" id="q3" name="r3" value="4">c)4
+        <input type="radio" id="q3" name="r3" value="0">d)0<br>
+        <p id="result2"></p>
+        <button onclick="change2()">submit</button>
+        
+       
+        
+       
+    </body>
+</html>

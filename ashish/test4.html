@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz</title>
+</head>
+<body>
+  <h1>Quiz</h1>
+  <form id="q4">
+    <h3>Question 1: What is the capital of France?</h3>
+    <input type="radio" name="q1" value="London"> London
+    <input type="radio" name="q1" value="Berlin"> Berlin
+    <input type="radio" name="q1" value="Madrid"> Madrid
+    <input type="radio" name="q1" value="Paris"> Paris
+
+    <h3>Question 2: Which planet is known as the Red Planet?</h3>
+    <input type="radio" name="q2" value="Mars"> Mars
+    <input type="radio" name="q2" value="Venus"> Venus
+    <input type="radio" name="q2" value="Earth"> Earth
+    <input type="radio" name="q2" value="Jupiter"> Jupiter
+
+    <h3>Question 3: What is 2 + 2?</h3>
+    <input type="radio" name="q3" value="3"> 3
+    <input type="radio" name="q3" value="4"> 4
+    <input type="radio" name="q3" value="5"> 5
+    <input type="radio" name="q3" value="6"> 6
+
+    <br><br>
+    <input type="button" value="Submit" onclick="change()">
+  </form>
+
+  <h2>Total Score: <span id="q5">0</span></h2>
+
+  <script>
+    function change() {
+      const a1 = document.getElementById("q4");
+      const totalScore = document.getElementById("q5");
+      let score = 0;
+
+      // Check answers for each question
+      const answers = {
+        q1: "Paris",
+        q2: "Mars",
+        q3: "4",
+      };
+
+      for (const question in answers) {
+        const selectedAnswer = a1.elements[question].value;
+        console.log(selectedAnswer )
+        
+        if (selectedAnswer === answers[question]) {
+          score++;
+        }
+      }
+
+      totalScore.textContent = score;
+    }
+  </script>
+</body>
+</html>

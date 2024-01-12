@@ -1,0 +1,31 @@
+
+<html>
+<head>
+    <script>
+        var clonedElement = null; 
+
+        function clone() {
+            var p1 = document.getElementById('q1');
+            d = p1.cloneNode(true); 
+            document.body.appendChild(d); 
+        }
+
+        function backclone() {
+            if (d !== 0) {
+                d.remove("q1"); 
+                d = 0; 
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="q1">
+        <input type="text"><br>
+        <input type="text"><br>
+        <input type="text"><br>
+        <button onclick="clone()">Clone</button>
+    </div>
+    
+    <button onclick="backclone()">Back Clone</button>
+</body>
+</html>

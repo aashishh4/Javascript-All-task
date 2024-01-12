@@ -1,0 +1,36 @@
+
+<html>
+<head>
+    <script>
+        function change() {
+            var a1 = document.getElementById("q1");
+            var a2 = a1.cloneNode(true);
+            document.getElementById("q2").appendChild(a2);
+        }
+
+        function myfunct() {
+            var f1 = document.getElementById("f1");
+            if (f1) {
+                f1.remove();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="f1">
+        <div id="q1">
+            <ul>
+                <li>html</li>
+                <li>css</li>
+                <li>javascript</li>
+            </ul>
+        </div>
+        <ol id="q2">
+            <li>apple</li>
+            <li>mango</li>
+        </ol>
+    </div>
+    <button onclick="change()">Clone</button>
+    <button onclick="myfunct()">Remove</button>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <script>
+           function displayCategoryData() {
+            var userData = JSON.parse(localStorage.getItem("product")) || [];
+            var finalData = '<table border="1px"><tr><th>Category</th><th>Color</th></tr>';
+
+            
+           var subcategorySelect = document.getElementById("w4");
+            subcategorySelect.innerHTML = ""; 
+
+            userData.forEach((element, i) => {
+                finalData += `
+                    <tr>
+                        <td>${element.category}</td>
+                        <td>${element.Color}</td>
+                      
+                    </tr>
+                `;
+
+               
+                var option = document.createElement("option");
+                option.value = element.category;
+                option.text = element.category;
+                subcategorySelect.appendChild(option);
+            });
+        }
+
+
+            function change1() {
+                var selectedValue = document.getElementById("w4").value;
+                var rate = document.querySelector("input[type='number']").value;
+                var title = document.querySelector("input[type='text']").value;
+               
+                var subCategoryData = JSON.parse(localStorage.getItem("sub")) || [];
+                subCategoryData.push({
+                    "subcategory": selectedValue,
+                    "rate": rate,
+                    "title":title
+                });
+
+                localStorage.setItem("sub", JSON.stringify(subCategoryData));
+
+                document.querySelector("input[type='number']").value = "";
+                document.querySelector("input[type='text']").value = "";
+
+                displaySubCategoryData();
+                
+            }
+
+            function displaySubCategoryData() {
+                var subCategoryData = JSON.parse(localStorage.getItem("sub")) || [];
+                var subCategoryTable = '<table border="1px"><tr><th>Subcategory</th><th>Rate</th><th>title<th>Action</th></tr>';
+
+               
+
+                subCategoryData.forEach((element,i) => {
+                    subCategoryTable += `
+                        <tr>
+                            <td>${element.subcategory}</td>
+                            <td>${element.rate}</td>
+                            <td>${element.title}</td>
+                            <td><button onclick="deleteSubCategory(${i})">Delete</button></td>
+                        </tr>
+                    `;
+                    
+                });
+
+                subCategoryTable += '</table>';
+                document.querySelector(".subcategory").innerHTML = subCategoryTable;
+            }
+            function deleteSubCategory(index) 
+            {
+
+            var subCategoryData = JSON.parse(localStorage.getItem("sub")) || [];
+            subCategoryData.splice(index, 1); 
+            localStorage.setItem("sub", JSON.stringify(subCategoryData));
+            displaySubCategoryData(); 
+        }
+        </script>
+    </head>
+    <body>
+        <div>
+            <h1>Sub category</h1>
+            <select id="w4">
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+            </select>
+        </div>
+        Rate: <input type="number"><br>
+        title: <input type="text"><br><br>
+        <button onclick="change1()">Add subcategory</button>
+        <br><br>
+        <div class="subcategory"></div>
+        <script>
+           
+            displaySubCategoryData();
+            displayCategoryData();
+        </script>
+        <br>
+         <a href="category.html"> Category</a><br><br>
+         <a href="colorpicker.html">goo flowchart</a>
+    </body>
+</html>

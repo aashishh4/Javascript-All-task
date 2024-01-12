@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <script>
+
+        var userData = JSON.parse(localStorage.getItem("product")) || [];
+         var subCategoryData = JSON.parse(localStorage.getItem("sub")) || [];
+         function showGraph() {
+            var categorySum = {}; // To store the sum of rates for each category
+
+            // Calculate the sum of rates for each category
+            for (var i = 0; i < subCategoryData.length; i++) {
+                var Add = subCategoryData[i].subcategory;
+                var rate = parseFloat(subCategoryData[i].rate);
+
+                if (!categorySum[Add]) {
+                    categorySum[Add] = 0;
+                }
+
+                categorySum[Add] += rate;
+            }
+
+            var labels = Object.keys(categorySum); // Get category labels
+            var backgroundColors = userData.map((item, index) => item.Color);
+            var rates = Object.values(categorySum); // Get the sums of rates
+
+            new Chart("myChart", {
+                type: "pie",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        backgroundColor: backgroundColors,
+                        data: rates
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Category Distribution"
+                    }
+                }
+            });
+        }
+
+       
+    </script>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <div>
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+        <button onclick="showGraph()">Show Chart</button>
+    </div>
+</body>
+<a href="category1.html">go subcategory</a>
+<script>
+     showGraph();
+</script>
+
+</html>

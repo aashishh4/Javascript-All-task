@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <script>
+            function change()
+            {
+                
+            var num1=parseInt(document.getElementById("num1").value)
+            var num2=parseInt(document.getElementById("num2").value)
+            var result=document.getElementById("ope").value;
+            switch(result)
+            {
+                case '+': var opr=num1+num2;
+                break;
+                
+                case '-': var opr=num1-num2;
+                break;
+                
+                case '*': var opr=num1*num2;
+                break;
+                
+                case '/': if(num2!==0)
+                {
+                    var opr=num1/num2;
+                } 
+                else
+                {
+                    var opr="cannot divide by zero";
+                }
+                break;
+                default: "invalid opertion";
+                
+                break;
+
+            }
+    
+            document.getElementById("q1").value=opr;
+            }
+    </script></head>
+
+    <body>
+        num1<input type="text" id="num1"><br>
+        num2<input type="text" id="num2"><br>
+        <select id="ope" onchange="change()">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        </select><br>
+        <input type="text" id="q1"><br>
+    </body>
+</html>

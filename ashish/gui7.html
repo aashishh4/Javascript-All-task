@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <script>
+           function change()
+           {
+            var t1=document.n1.n2.value;
+            var t2=document.n1.n3.value;
+            if(t1.trim()=="")
+            {
+                document.getElementById("l1").innerHTML="login id cannot left blank ";
+                return false;
+            }
+            else
+            if(t2.trim()=="")
+            {
+                document.getElementById("l1").innerHTML="password cannot left blank";
+                return false;
+            }
+            else
+            if(t1.length<=6)
+            {
+                document.getElementById("l1").innerHTML="login atlest 6 char";
+                return false;
+            }
+            else
+            if(t2.length<6)
+            {
+                document.getElementById("l1").innerHTML="pass atlest 5 char";
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+                   }
+        </script>
+    </head>
+    <body>
+        <form action="welcome.html" name="n1" onsubmit=" return change()">
+        login<input type="email" id="n2"><br>
+        pass<input type="password" id="n3"><br>
+        <input type="submit"><br>
+        <label id="l1"></label>
+        </form>
+    </body>
+</html>

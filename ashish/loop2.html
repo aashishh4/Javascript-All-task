@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobile Number Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.mobile-valid').on('keypress', function(e) {
+                var $this = $(this);
+                var regex = new RegExp("^[0-9\b]+$");
+                var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+
+                // Only allow 10 digits
+                if ($this.val().length >= 10) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Allow digits starting with 6, 7, 8, or 9
+                if (e.charCode >= 54 || e.charCode < 48) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                if (regex.test(str)) {
+                    return true;
+                }
+
+                e.preventDefault();
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Simple jQuery validation for mobile number using regular expression</h2>
+    <p>Validations include:</p>
+    <ul>
+        <li>10 digit number only (No alphabets and No special characters)</li>
+        <li>Numbers start from 6, 7, 8, 9</li>
+    </ul>
+
+    <label>Mobile Number:</label>
+    <input type="text" class="form-control mobile-valid">
+</body>
+</html>
